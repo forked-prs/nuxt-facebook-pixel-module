@@ -43,7 +43,8 @@ Add `nuxt-facebook-pixel-module` to `modules` section of `nuxt.config.js`.
       /* module options */
       track: 'PageView',
       pixelId: 'FACEBOOK_PIXEL_ID',
-      disabled: false
+      disabled: false,
+      debug: false,
     }],
  ]
 }
@@ -60,7 +61,8 @@ or even
     /* module options */
     track: 'PageView',
     pixelId: 'FACEBOOK_PIXEL_ID',
-    disabled: false
+    disabled: false,
+    debug: false,
   },
 }
 ```
@@ -80,6 +82,13 @@ If you'd like to install the pixel disabled, and enable it later after the user 
   },
 }
 ```
+
+By Default it is disabled in development mode
+you can set 
+`debug: true`
+
+to enable while in dev
+
 
 Now, in your component, you can call the following in order to start the pixel and track the current page.
 
