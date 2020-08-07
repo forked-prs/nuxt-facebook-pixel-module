@@ -1,9 +1,6 @@
 # nuxt-facebook-pixel-module
 
-[![npm (scoped with tag)](https://img.shields.io/npm/v/nuxt-facebook-pixel-module/latest.svg?style=flat-square)](https://npmjs.com/package/nuxt-facebook-pixel-module)
-[![npm](https://img.shields.io/npm/dt/nuxt-facebook-pixel-module.svg?style=flat-square)](https://npmjs.com/package/nuxt-facebook-pixel-module)
-[![js-standard-style](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com)
-[![CircleCI](https://img.shields.io/circleci/project/github/WilliamDASILVA/nuxt-facebook-pixel-module/master.svg?style=flat-square)](https://circleci.com/gh/WilliamDASILVA/nuxt-facebook-pixel-module/tree/master)
+
 
 > A NuxtJS module thats injects Facebook Pixel code
 
@@ -22,47 +19,68 @@
 
 ## Install
 
+
+1. Add `@forked-prs/nuxt-facebook-pixel-module` dependency to your project
+
 ```bash
-$ npm install --save nuxt-facebook-pixel-module
-// or
-$ yarn add nuxt-facebook-pixel-module
+yarn add --dev @forked-prs/nuxt-facebook-pixel-module # or npm install --save-dev @forked-prs/nuxt-facebook-pixel-module
 ```
 
 ## Getting Started
 
-Add `nuxt-facebook-pixel-module` to `modules` section of `nuxt.config.js`.
+2. Add `@forked-prs/nuxt-facebook-pixel-module` to the `buildModules` section of `nuxt.config.js`
 
 ```js
-{
-  modules: [
-    // Simple usage
-    'nuxt-facebook-pixel-module',
-
-    // With options
-    ['nuxt-facebook-pixel-module', {
-      /* module options */
+export default {
+  buildModules: [
+    ['@forked-prs/nuxt-facebook-pixel-module', {
       track: 'PageView',
       pixelId: 'FACEBOOK_PIXEL_ID',
       disabled: false,
       debug: false,
-    }],
- ]
+    }]
+  ]
 }
 ```
 
-or even
+:warning: If you are using Nuxt **< v2.9** you have to install the module as a `dependency` (No `--dev` or `--save-dev` flags) and use `modules` section in `nuxt.config.js` instead of `buildModules`.
+
+
+### Using top level options
 
 ```js
-{
-  modules: [
-    'nuxt-facebook-pixel-module',
+export default {
+  buildModules: [
+    '@forked-prs/nuxt-facebook-pixel-module'
   ],
   facebook: {
-    /* module options */
     track: 'PageView',
     pixelId: 'FACEBOOK_PIXEL_ID',
-    disabled: false,
-    debug: false,
+  }
+}
+```
+
+### Runtime Config
+
+You can use [runtime config](https://nuxtjs.org/guide/runtime-config) if need to use dynamic environment variables in production. Otherwise, the options will be hardcoded during the build and won't be read from `nuxt.config` anymore.
+
+```js
+export default {
+  buildModules: [
+    '@forked-prs/nuxt-facebook-pixel-module'
+  ],
+
+  facebook: {
+    pixelId: '123456789012345', // Used as fallback if no runtime config is provided
+  },
+
+  publicRuntimeConfig: {
+    facebook: {
+      /* module options */
+      pixelId: process.env.FB_PIXEL_ID || 'some-staging-key',
+      disabled: false,
+      debug: !!process.env.FB_PIXEL_DEBUG,
+    }
   },
 }
 ```
@@ -73,8 +91,8 @@ If you'd like to install the pixel disabled, and enable it later after the user 
 
 ```js
 {
-  modules: [
-    'nuxt-facebook-pixel-module',
+  buildModules: [
+    '@forked-prs/nuxt-facebook-pixel-module',
   ],
   facebook: {
     ...
@@ -87,7 +105,7 @@ By Default it is disabled in development mode
 you can set 
 `debug: true`
 
-to enable while in dev
+to enable while in dev or if using conjuction with runtimeconfig you can set `FB_PIXEL_DEBUG=true` in your .env
 
 
 Now, in your component, you can call the following in order to start the pixel and track the current page.
