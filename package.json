@@ -1,6 +1,6 @@
 {
   "name": "@forked-prs/nuxt-facebook-pixel-module",
-  "version": "1.4.2",
+  "version": "1.5.1",
   "description": "Nuxt plugin for Facebook pixel",
   "license": "MIT",
   "contributors": [
@@ -13,9 +13,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/forked-prs/nuxt-facebook-pixel-module.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   },
   "scripts": {
     "dev": "nuxt test/fixture",
